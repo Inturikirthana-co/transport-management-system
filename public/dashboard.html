@@ -2,49 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard - Transport Management</title>
+  <title>Dashboard | Transport Management</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="dashboard">
-    <header>🚌 Transport Management Dashboard</header>
-
-    <h2 style="margin-top:30px;">Select a Vehicle Type</h2>
+    <h1>Transport Management Dashboard</h1>
     <select id="vehicleSelect">
-      <option value="">-- Choose Vehicle --</option>
-      <option value="bus">Bus</option>
-      <option value="car">Car</option>
-      <option value="truck">Truck</option>
       <option value="bike">Bike</option>
+      <option value="car">Car</option>
+      <option value="bus">Bus</option>
+      <option value="truck">Truck</option>
     </select>
-    <button onclick="getVehicleDetails()">Show Details</button>
+    <button onclick="showVehicle()">Show Details</button>
 
-    <div id="infoBox">
-      <h3>Vehicle details will appear here...</h3>
-    </div>
-
-    <footer>© 2025 Transport Management System</footer>
+    <div id="vehicleDetails" class="vehicle-card"></div>
   </div>
 
   <script>
-    async function getVehicleDetails() {
-      const vehicle = document.getElementById("vehicleSelect").value;
-      if (!vehicle) {
-        alert("Please select a vehicle type!");
-        return;
-      }
+    const vehicles = {
+      bike: { name: "Bike", image: "bike1.jpg", info: "Courier Delivery Zone A" },
+      car: { name: "Car", image: "car1.jpg", info: "Passenger Transport Zone B" },
+      bus: { name: "Bus", image: "bus1.jpg", info: "City Public Transport Zone C" },
+      truck: { name: "Truck", image: "truck1.jpg", info: "Goods Delivery Zone D" },
+    };
 
-      const response = await fetch(`/api/vehicle/${vehicle}`);
-      const data = await response.json();
+    function showVehicle() {
+      const selected = document.getElementById("vehicleSelect").value;
+      const vehicle = vehicles[selected];
 
-      const infoBox = document.getElementById("infoBox");
-      infoBox.innerHTML = `
-        <h2>${data.vehicle}</h2>
-        <img src="${data.image}" alt="${data.vehicle}">
-        <div class="details">
-          <p><strong>Route:</strong> ${data.route}</p>
-          <p><strong>Driver:</strong> ${data.driver}</p>
-        </div>
+      document.getElementById("vehicleDetails").innerHTML = `
+        <h2>${vehicle.name}</h2>
+        <img src="/images/${vehicle.image}" alt="${vehicle.name}">
+        <p>${vehicle.info}</p>
       `;
     }
   </script>
