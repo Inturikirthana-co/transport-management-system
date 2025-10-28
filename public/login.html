@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login | Transport Management</title>
+  <title>Login | Transport System</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Login</button>
-      <p>Don't have an account? <a href="signup.html" style="color:yellow;">Sign up</a></p>
+      <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
   </div>
 
@@ -31,7 +31,7 @@
       if (res.ok) {
         window.location.href = "dashboard.html";
       } else {
-        alert("Invalid login. Please try again.");
+        alert("Invalid credentials. Try again!");
       }
     });
   </script>

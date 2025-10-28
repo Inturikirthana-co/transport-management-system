@@ -2,29 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard | Transport Management</title>
+  <title>Dashboard | Transport System</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="dashboard">
-    <h1>Transport Management Dashboard</h1>
-    <select id="vehicleSelect">
-      <option value="bike">Bike</option>
-      <option value="car">Car</option>
-      <option value="bus">Bus</option>
-      <option value="truck">Truck</option>
-    </select>
-    <button onclick="showVehicle()">Show Details</button>
 
-    <div id="vehicleDetails" class="vehicle-card"></div>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>🚛 Transport Portal</h1>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Dashboard Body -->
+  <div class="dashboard">
+    <div class="dashboard-content">
+      <h1>Welcome to the Dashboard 🚀</h1>
+      <p>Select a vehicle to view its route, driver, and destination details.</p>
+
+      <select id="vehicleSelect">
+        <option value="bike">Bike</option>
+        <option value="car">Car</option>
+        <option value="bus">Bus</option>
+        <option value="truck">Truck</option>
+      </select>
+      <button onclick="showVehicle()">Show Details</button>
+
+      <div id="vehicleDetails" class="vehicle-card"></div>
+    </div>
   </div>
 
   <script>
     const vehicles = {
-      bike: { name: "Bike", image: "bike1.jpg", info: "Courier Delivery Zone A" },
-      car: { name: "Car", image: "car1.jpg", info: "Passenger Transport Zone B" },
-      bus: { name: "Bus", image: "bus1.jpg", info: "City Public Transport Zone C" },
-      truck: { name: "Truck", image: "truck1.jpg", info: "Goods Delivery Zone D" },
+      bike: {
+        name: "Bike",
+        image: "bike1.jpg",
+        info: "Used for short-distance courier deliveries and small packages.",
+        distance: "Up to 5 km range",
+        driver: "Driver: Arjun Reddy",
+        destination: "Zone A – Downtown / City Center"
+      },
+      car: {
+        name: "Car",
+        image: "car1.jpg",
+        info: "Used for office commutes, local travel, and fast deliveries.",
+        distance: "Up to 20 km range",
+        driver: "Driver: Priya Nair",
+        destination: "Central Avenue → Tech Park → Greenfield"
+      },
+      bus: {
+        name: "Bus",
+        image: "bus1.jpg",
+        info: "Public transport for city commuters with multiple stops.",
+        distance: "30 km total loop",
+        driver: "Driver: Mohan Das",
+        destination: "City Loop: Station → Mall → College → Park"
+      },
+      truck: {
+        name: "Truck",
+        image: "truck1.jpg",
+        info: "Heavy-duty transport for industrial and logistics use.",
+        distance: "120 km intercity route",
+        driver: "Driver: Kiran Kumar",
+        destination: "Warehouse A → Highway B → Port C"
+      },
     };
 
     function showVehicle() {
@@ -34,9 +74,18 @@
       document.getElementById("vehicleDetails").innerHTML = `
         <h2>${vehicle.name}</h2>
         <img src="/images/${vehicle.image}" alt="${vehicle.name}">
-        <p>${vehicle.info}</p>
+        <p><strong>Purpose:</strong> ${vehicle.info}</p>
+        <p><strong>Distance:</strong> ${vehicle.distance}</p>
+        <p><strong>Destination:</strong> ${vehicle.destination}</p>
+        <p><strong>${vehicle.driver}</strong></p>
       `;
     }
+
+    function logout() {
+      alert("You have been logged out!");
+      window.location.href = "login.html";
+    }
   </script>
+
 </body>
 </html>
