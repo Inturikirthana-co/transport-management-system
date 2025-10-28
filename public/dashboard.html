@@ -1,74 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard - Transport Management System</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #74ebd5, #acb6e5);
-        color: #333;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-      }
-      h1 {
-        margin-top: 30px;
-        color: #222;
-      }
-      select, button {
-        margin-top: 20px;
-        padding: 10px 15px;
-        border-radius: 6px;
-        border: none;
-        font-size: 16px;
-      }
-      #infoBox {
-        margin-top: 30px;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        width: 60%;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Welcome to the Dashboard 🚀</h1>
-    <h3>Select a Vehicle to View Assigned Route & Driver</h3>
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Transport Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <header>🚌 Transport Management Dashboard</header>
 
+    <h2 style="margin-top:30px;">Select a Vehicle Type</h2>
     <select id="vehicleSelect">
-      <option value="">-- Select Vehicle Type --</option>
+      <option value="">-- Choose Vehicle --</option>
       <option value="bus">Bus</option>
       <option value="car">Car</option>
       <option value="truck">Truck</option>
       <option value="bike">Bike</option>
     </select>
-
     <button onclick="getVehicleDetails()">Show Details</button>
 
-    <div id="infoBox"></div>
+    <div id="infoBox">
+      <h3>Vehicle details will appear here...</h3>
+    </div>
 
-    <script>
-      async function getVehicleDetails() {
-        const vehicle = document.getElementById("vehicleSelect").value;
-        if (!vehicle) {
-          alert("Please select a vehicle type!");
-          return;
-        }
+    <footer>© 2025 Transport Management System</footer>
+  </div>
 
-        const response = await fetch(`/api/vehicle/${vehicle}`);
-        const data = await response.json();
+  <script>
+    async function getVehicleDetails() {
+      const vehicle = document.getElementById("vehicleSelect").value;
+      if (!vehicle) {
+        alert("Please select a vehicle type!");
+        return;
+      }
 
-        const infoBox = document.getElementById("infoBox");
-        infoBox.innerHTML = `
-          <h2>Vehicle: ${data.vehicle}</h2>
+      const response = await fetch(`/api/vehicle/${vehicle}`);
+      const data = await response.json();
+
+      const infoBox = document.getElementById("infoBox");
+      infoBox.innerHTML = `
+        <h2>${data.vehicle}</h2>
+        <img src="${data.image}" alt="${data.vehicle}">
+        <div class="details">
           <p><strong>Route:</strong> ${data.route}</p>
           <p><strong>Driver:</strong> ${data.driver}</p>
-        `;
-      }
-    </script>
-  </body>
+        </div>
+      `;
+    }
+  </script>
+</body>
 </html>
