@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Driver Details | TMS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>👨‍✈️ Assigned Driver</h1>
+  <div id="driverDetails" class="driver-card"></div>
+
+  <script>
+    async function loadDriver() {
+      const vehicleId = localStorage.getItem('selectedVehicle');
+      const res = await fetch(`/driver/${vehicleId}`);
+      const driver = await res.json();
+      document.getElementById('driverDetails').innerHTML = `
+        <h2>${driver.name}</h2>
+        <p><strong>Experience:</strong> ${driver.experience} years</p>
+        <p><strong>Contact:</strong> ${driver.phone}</p>
+        <p><strong>Vehicle ID:</strong> ${driver.vehicle_id}</p>
+        <button onclick="window.location.href='confirm.html'">Proceed</button>
+      `;
+    }
+    loadDriver();
+  </script>
+</body>
+</html>

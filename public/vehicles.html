@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Vehicle | TMS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>🚗 Select Your Vehicle</h1>
+  <div class="vehicle-container" id="vehicleList"></div>
+
+  <script>
+    async function loadVehicles() {
+      const response = await fetch('/vehicles');
+      const vehicles = await response.json();
+      const list = document.getElementById('vehicleList');
+      list.innerHTML = vehicles.map(v => `
+        <div class="vehicle-card">
+          <img src="images/${v.image}" alt="${v.name}">
+          <h2>${v.name}</h2>
+          <p>Type: ${v.type}</p>
+          <p>Distance: ${v.distance} km</p>
+          <button onclick="selectVehicle(${v.id})">Select</button>
+        </div>
+      `).join('');
+    }
+
+    function selectVehicle(id) {
+      localStorage.setItem('selectedVehicle', id);
+      window.location.href = 'driver.html';
+    }
+
+    loadVehicles();
+  </script>
+</body>
+</html>
