@@ -1,20 +1,18 @@
-// db.js
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
-const db = mysql.createConnection({
+const connection = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'tms_db',
-  port: process.env.DB_PORT || 3306
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'tms_db'
 });
 
-db.connect(err => {
+connection.connect((err) => {
   if (err) {
-    console.error('❌ Database connection failed:', err);
+    console.error('❌ Database connection failed:', err.message);
   } else {
     console.log('✅ MySQL Connected...');
   }
 });
 
-module.exports = db;
+module.exports = connection;
